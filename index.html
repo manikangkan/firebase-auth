@@ -1,29 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
-      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
-
-    <title>LearningFirebaseAuth!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Saira&display=swap"
+      rel="stylesheet"
+    />
+    <title>authasity</title>
+    <style>
+      * {
+        font-family: "Saira", sans-serif !important;
+        color: black;
+      }
+      .btn-secondary {
+        margin-right: 0.6rem;
+      }
+      .logged-in,
+      .logged-out {
+        display: none;
+      }
+    </style>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">
         <a class="navbar-brand" href="#">
           <img
-            src="logo.jpeg"
+            src="assets/logo.jpeg"
             alt=""
             width="30"
             class="d-inline-block align-text-top rounded-circle"
           />
-          Manikangkan<strong>Zone</strong>
+          asity<strong>Zone</strong>
         </a>
         <button
           class="navbar-toggler"
@@ -42,15 +60,15 @@
         >
           <ul class="navbar-nav">
             <a
-              class="nav-link"
+              class="nav-link logged-in"
               href="#"
               data-bs-toggle="modal"
               data-bs-target="#account"
               >Account</a
             >
-            <a class="nav-link" href="#">Log Out</a>
+            <a class="nav-link logged-in" href="#" id="log-out">Log Out</a>
             <a
-              class="nav-link"
+              class="nav-link logged-in"
               href="#"
               data-bs-toggle="modal"
               data-bs-target="#createGuide"
@@ -58,7 +76,7 @@
               >Create Guide</a
             >
             <a
-              class="nav-link"
+              class="nav-link logged-out"
               href="#"
               data-bs-toggle="modal"
               data-bs-target="#login"
@@ -66,7 +84,7 @@
               >Login</a
             >
             <a
-              class="nav-link"
+              class="nav-link logged-out"
               href="#"
               data-bs-toggle="modal"
               data-bs-target="#signUp"
@@ -78,8 +96,8 @@
       </div>
     </nav>
 
-    <!-- Modal -->
-    <!-- Account -->
+    <!-- ------------------------------------------------------------ -->
+    <!-- account information modal -->
 
     <div
       class="modal fade"
@@ -91,32 +109,29 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Account</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
+            <h5 class="modal-title" id="exampleModalLabel">
+              Account Information
+            </h5>
           </div>
           <div class="modal-body">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id,
-            molestias?
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-            <button type="button" class="btn btn-primary">Got It</button>
+            <div id="account-details"></div>
+            <div class="mf">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- Create Guide -->
+
+    <!-- ------------------------------------------------------------ -->
+    <!-- create guide modal -->
+
     <div
       class="modal fade"
       id="createGuide"
@@ -126,45 +141,48 @@
     >
       <div class="modal-dialog">
         <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Create Guide</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
           <div class="modal-body">
-            <form>
+            <form id="createguide-form">
               <div class="mb-3">
-                <label for="recipient-name" class="col-form-label"
-                  >Guide Title</label
+                <label for="create-guide-title" class="col-form-label"
+                  >Quote Title</label
                 >
-                <input type="text" class="form-control" id="recipient-name" />
+                <input
+                  type="text"
+                  class="form-control"
+                  id="create-guide-title"
+                  required
+                />
               </div>
               <div class="mb-3">
-                <label for="recipient-name" class="col-form-label"
-                  >Guide Content</label
+                <label for="create-guide-content" class="col-form-label"
+                  >Quote Content:</label
                 >
-                <input type="text" class="form-control" id="recipient-name" />
+                <textarea
+                  class="form-control"
+                  id="create-guide-content"
+                  required
+                ></textarea>
+              </div>
+              <div class="mf">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button type="submit" class="btn btn-primary">Create</button>
               </div>
             </form>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-            <button type="button" class="btn btn-primary">Create</button>
           </div>
         </div>
       </div>
     </div>
-    <!-- Login -->
+
+    <!-- ------------------------------------------------------------ -->
+    <!-- login modal -->
+
     <div
       class="modal fade"
       id="login"
@@ -174,45 +192,39 @@
     >
       <div class="modal-dialog">
         <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Login</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
           <div class="modal-body">
-            <form>
+            <form id="login-form">
               <div class="mb-3">
-                <label for="recipient-name" class="col-form-label"
+                <label for="login-email" class="col-form-label"
                   >Email Address</label
                 >
-                <input type="text" class="form-control" id="recipient-name" />
+                <input type="text" class="form-control" id="login-email" />
               </div>
               <div class="mb-3">
-                <label for="recipient-name" class="col-form-label"
+                <label for="login-password" class="col-form-label"
                   >Password</label
                 >
-                <input type="text" class="form-control" id="recipient-name" />
+                <input type="text" class="form-control" id="login-password" />
+              </div>
+              <div class="mf">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button type="submit" class="btn btn-primary">Login</button>
               </div>
             </form>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-            <button type="button" class="btn btn-primary">Login</button>
           </div>
         </div>
       </div>
     </div>
-    <!-- SignUp -->
+
+    <!-- ------------------------------------------------------------ -->
+    <!-- signup modal -->
+
     <div
       class="modal fade"
       id="signUp"
@@ -222,135 +234,66 @@
     >
       <div class="modal-dialog">
         <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Sign Up</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
           <div class="modal-body">
-            <form>
+            <form id="signup-form">
               <div class="mb-3">
-                <label for="recipient-name" class="col-form-label"
+                <label for="signup-email" class="col-form-label"
                   >Email Address</label
                 >
-                <input type="text" class="form-control" id="recipient-name" />
+                <input type="text" class="form-control" id="signup-email" />
               </div>
               <div class="mb-3">
-                <label for="recipient-name" class="col-form-label"
+                <label for="signup-password" class="col-form-label"
                   >Choose Password</label
                 >
-                <input type="text" class="form-control" id="recipient-name" />
+                <input
+                  type="text"
+                  class="form-control signup-password"
+                  id="signup-password"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="signup-bio" class="col-form-label">Biography</label>
+                <input
+                  type="text"
+                  class="form-control signup-bio"
+                  id="signup-bio"
+                />
+              </div>
+              <div class="mf">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button type="submit" class="btn btn-primary">Sign Up</button>
               </div>
             </form>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-            <button type="button" class="btn btn-primary">Sign Up</button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Accordion -->
-    <div class="container mt-5">
-      <div class="accordion accordion-flush" id="accordionFlushExample">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="flush-headingOne">
-            <button
-              class="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#flush-collapseOne"
-              aria-expanded="false"
-              aria-controls="flush-collapseOne"
-            >
-              Accordion Item #1
-            </button>
-          </h2>
-          <div
-            id="flush-collapseOne"
-            class="accordion-collapse collapse"
-            aria-labelledby="flush-headingOne"
-            data-bs-parent="#accordionFlushExample"
-          >
-            <div class="accordion-body">
-              Placeholder content for this accordion, which is intended to
-              demonstrate the <code>.accordion-flush</code> class. This is the
-              first item's accordion body.
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="flush-headingTwo">
-            <button
-              class="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#flush-collapseTwo"
-              aria-expanded="false"
-              aria-controls="flush-collapseTwo"
-            >
-              Accordion Item #2
-            </button>
-          </h2>
-          <div
-            id="flush-collapseTwo"
-            class="accordion-collapse collapse"
-            aria-labelledby="flush-headingTwo"
-            data-bs-parent="#accordionFlushExample"
-          >
-            <div class="accordion-body">
-              Placeholder content for this accordion, which is intended to
-              demonstrate the <code>.accordion-flush</code> class. This is the
-              second item's accordion body. Let's imagine this being filled with
-              some actual content.
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="flush-headingThree">
-            <button
-              class="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#flush-collapseThree"
-              aria-expanded="false"
-              aria-controls="flush-collapseThree"
-            >
-              Accordion Item #3
-            </button>
-          </h2>
-          <div
-            id="flush-collapseThree"
-            class="accordion-collapse collapse"
-            aria-labelledby="flush-headingThree"
-            data-bs-parent="#accordionFlushExample"
-          >
-            <div class="accordion-body">
-              Placeholder content for this accordion, which is intended to
-              demonstrate the <code>.accordion-flush</code> class. This is the
-              third item's accordion body. Nothing more exciting happening here
-              in terms of content, but just filling up the space to make it
-              look, at least at first glance, a bit more representative of how
-              this would look in a real-world application.
-            </div>
-          </div>
-        </div>
-      </div>
+    <!-- ------------------------------------------------------------ -->
+    <!-- dynamic data adding -->
+
+    <div class="container my-4">
+      <ol class="list-group list-group-numbered" id="fetch-data"></ol>
     </div>
+    <!-- ------------------------------------------------------------ -->
+
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-firestore.js"></script>
+    <script src="script/config.js"></script>
+    <script src="script/index.js"></script>
+    <script src="script/auth.js"></script>
     <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
   </body>
